@@ -24,6 +24,9 @@
   <!-- Transition theme. More available in /themes/transition/ or create your own. -->
   <link rel="stylesheet" href="deck.js/themes/transition/horizontal-slide.css">
 
+  <!-- Custom Styles. -->
+  <link rel="stylesheet" href="static/style.css">
+
   <!-- Required Modernizr file -->
   <script src="deck.js/modernizr.custom.js"></script>
 </head>
@@ -33,13 +36,15 @@
 
 <section class="slide">
   <h2>Estimation of Human Body Segment Parameters with Python</h2>
-  <table>
+  <table class="side-by-side">
     <tr>
       <td>
-        <p>Jason K. Moore</p>
+        <h3>Jason K. Moore</h3>
         <p>University of California, Davis</p>
-        <p>Christopher Dembia</p>
+        <p><a href="http://moorepants.info">moorepants.info</a></p>
+        <h3>Christopher Dembia</h3>
         <p>Stanford University</p>
+        <p><a href="http://fitze.github.io">fitze.github.io</a></p>
       </td>
       <td>
         <img src="static/haya.png" />
@@ -50,50 +55,65 @@
 
 <section class="slide">
   <h2>Background</h2>
-  <p>The human is most often modeled as a collection of rigid bodies.</p>
-  <dl>
-    <dt>Inertial Properties</dt>
-    <dd>mass, center of mass, moments/products of inertia</dd>
-  </dl>
+  <p>For motion study purposes, the human is most often modeled as a collection
+  of rigid bodies.</p>
+  <h3>Rigid Body Inertial Properties</h3>
+  <ul>
+    <li>mass [scalar]</li>
+    <li>center of mass [vector]</li>
+    <li>moments/products of inertia [tensor]</li>
+  </ul>
 </section>
 
 <section class="slide">
   <h2>Use cases</h2>
-  <ul>
-    <li>simulation of human movement</li>
-    <li>walking/running studies</li>
-    <li>sports biomechanics</li>
-    <li>accident reconstruction</li>
-    <li>prosthesis design</li>
-  </ul>
+  <table class="side-by-side">
+    <tr>
+      <td>
+        <ul>
+          <li>simulation of human movement</li>
+          <li>walking/running studies</li>
+          <li>sports biomechanics</li>
+          <li>accident reconstruction</li>
+          <li>prosthesis design</li>
+        </ul>
+      </td>
+      <td>
+        <img src="static/ice-skater.jpeg" />
+        <p
+        style="font-size:xx-small">https://www.boundless.com/physics/rotational-kinematics-angular-momentum-and-energy/conservation-of-angular-momentum/conservation-of-angular-momentum/</p>
+      </td>
+    </tr>
+  </table>
 </section>
 
 <section class="slide">
   <h2>Methods</h2>
   <ul>
-    <li>Cadaver measurements: [Dempster1955], [Clauser1969],
-    [Chandler1975]</li>
-    <li>Photogrammetry: [Jensen1978]</li>
-    <li>Ray scanning techniques: [Zatsiorsky1983], [Zatsiorsky1990]</li>
-    <li>MRI: [Pearsall1994], [Cheng2000]</li>
-    <li>Water displacement [Park1999]</li>
+    <li>Cadaver measurements: [Dempster 1955], [Clauser 1969],
+    [Chandler 1975]</li>
+    <li>Photogrammetry: [Jensen 1978]</li>
+    <li>Ray scanning techniques: [Zatsiorsky 1983], [Zatsiorsky 1990]</li>
+    <li>MRI: [Pearsall1994], [Cheng 2000]</li>
+    <li>Water displacement [Park 1999]</li>
     <li>Geometrical estimation [Yeadon 1990]</li>
   </ul>
 </section>
 
 <section class="slide">
   <h2>Yeadon's Method</h2>
-  <ul>
+  <p>Developed for studies of gynamistic motions</li>
+  <p>Several advantages: fast, cheap, and reasonably accurate</p>
+  <ol type="A">
     <li>The simulation of aerial movement--I. The determination of orientation
-    angles from film data Journal of Biomechanics, 1990, 23, 59 - 66</li>
-    <li>The Simulation of Aerial Movement-II. A Mathematical Inertia Model of
-    the Human Body Journal of Biomechanics, 1990, 23, 67-74</li>
+    angles from film data. Journal of Biomechanics, 1990, 23, 59 - 66</li>
+    <li>The Simulation of Aerial Movement--II. A Mathematical Inertia Model of
+    the Human Body. Journal of Biomechanics, 1990, 23, 67-74</li>
     <li>The simulation of aerial movement--III. The determination of the angular
-    momentum of the human body Journal of Biomechanics, 1990, 23, 75 - 83</li>
-    <li>The simulation of aerial movement--IV. A computer simulation model
+    momentum of the human body. Journal of Biomechanics, 1990, 23, 75 - 83</li>
+    <li>The simulation of aerial movement--IV. A computer simulation model.
     Journal of Biomechanics, 1990, 23, 85 - 89</li>
-  </ul>
-  advantages: fast, cheap, accurate
+  </ol>
 </section>
 
 <section class="slide">
@@ -103,15 +123,17 @@
 
 <section class="slide">
   <h2>Yeadon's Method</h2>
+  <p>Yeadon models a human using 39 stadium solids, and 1 semi-ellipsoid for the
+  cranium.</p>
   <img src="static/segments.png" />
 </section>
 
 <section class="slide">
   <h2>Stadium and stadium solid</h2>
-  <table>
+  <table class="side-by-side">
     <tr>
       <td>
-        <img src="static/stadium.png" />
+        <img src="static/stadium.png" width="400px"/>
       </td>
       <td>
         <img src="static/stadium-solid.png" />
@@ -132,23 +154,30 @@
 
 <section class="slide">
   <h2>Software design</h2>
-  <dl>
-    <dt>Main Modules</dt>
-    <dd>inertia.py, solid.py, segment.py, human.py</dd>
-    <dt>Interface Modules</dt>
-    <dd>ui.py, gui.py</dt>
-  </dl>
+  <h3>Main Modules</h3>
+  <ul>
+    <li><strong>inertia.py</strong>: parallel axis thereom, principal axes,
+    Euler rotations</li>
+    <li><strong>solid.py</strong>: stadium, solid, stadium solid, ellipsoid, drawing</li>
+    <li><strong>segment.py</strong>: collections of solids</li>
+    <li><strong>human.py</strong>: collection of segments, IO</li>
+  </ul>
+  <h3>Interface Modules</h3>
+  <ul>
+    <li><strong>ui.py</strong>: text based interface to the api</li>
+    <li><strong>gui.py</strong>: traits based MayaVi graphical interface</li>
+  </ul>
 </section>
 
 <section class="slide">
   <h2>The Stack</h2>
   <ul>
-    <li>NumPy</li>
-    <li>PyYaml</li>
-    <li>MayaVi</li>
-    <li>nose</li>
-    <li>Sphinx</li>
-    <li>numpydoc</li>
+    <li><strong>NumPy</strong>: numerical computations, linear algebra</li>
+    <li><strong>PyYaml</strong>: parses input files</li>
+    <li><strong>MayaVi</strong>: 3D visualization, GUI toolkit</li>
+    <li><strong>nose</strong>: testing framework</li>
+    <li><strong>Sphinx</strong>: documention generation</li>
+    <li><strong>numpydoc</strong>: pretty doc strings</li>
   </ul>
 </section>
 
@@ -168,12 +197,29 @@
 
 <section class="slide">
   <h2>That's all folks!</h2>
-  <ul>
-    <li>Source Code: https://github.com/fitze/yeadon</li>
-    <li>Documentation: http://pythonhosted.org/yeadon</li>
-    <li>PyPi: https://pypi.python.org/pypi/yeadon</li>
-    <li>Screencast: http://youtu.be/o-5Ss6YLY0I</li>
-  </ul>
+  <table class="side-by-side">
+    <tr>
+      <td>
+        <ul>
+          <li><strong>Source Code</strong>: <a
+            href="https://github.com/fitze/yeadon">github.com/fitze/yeadon</a></li>
+          <li><strong>Documentation</strong>: <a
+            href="http://pythonhosted.org/yeadon">pythonhosted.org/yeadon</a></li>
+          <li><strong>PyPi</strong>: <a
+            href="https://pypi.python.org/pypi/yeadon">pypi.python.org/pypi/yeadon</a></li>
+          <li><strong>Screencast</strong>: <a
+            href="http://youtu.be/o-5Ss6YLY0I">youtu.be/o-5Ss6YLY0I</a></li>
+          <li><strong>Working paper</strong>: <a
+            href="https://github.com/fitze/humaninertiapaper">github.com/fitze/humaninertiapaper</a></li>
+          <li><strong>Presentation Source</strong>: <a
+            href="https://github.com/moorepants/scipy-2013-yeadon">github.com/moorepants/scipy-2013-yeadon</a></li>
+        </ul>
+      </td>
+      <td>
+        <img src="static/bye.png" />
+      </td>
+    </tr>
+  </table>
 </section>
 
 <!-- End slides. -->
